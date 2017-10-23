@@ -16,7 +16,8 @@ public class BallsSimulator implements Simulable {
     private void Afficher() {
         this.window.reset();
         for (int i = 0; i < this.balles.getBalls().length; i++) {
-            this.window.addGraphicalElement(new Oval(this.balles.getBalls()[i].x, this.balles.getBalls()[i].y, Color.WHITE, Color.WHITE, 10));
+            this.window.addGraphicalElement(
+            new Oval(this.balles.getBalls()[i].x, this.balles.getBalls()[i].y, Color.WHITE, Color.WHITE, 10));
         }
     }
 
