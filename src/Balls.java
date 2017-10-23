@@ -14,18 +14,21 @@ public class Balls {
       }
     }
     void translate(int dx, int dy){
+      dxTotal += dx;
+      dyTotal += dy;
       for (int i = 0; i < this.tabBalle.length; i++) {
         this.tabBalle[i].x += dx;
-        dxTotal += dx;
         this.tabBalle[i].y += dy;
-        dyTotal += dy;
       }
+    }
 
     void reInit(){
       for (int i = 0; i < this.tabBalle.length; i++) {
         this.tabBalle[i].x -= dxTotal;
         this.tabBalle[i].y -= dyTotal;
       }
+    }
+
     @Override
     public String toString() {
         String reponse = "[";

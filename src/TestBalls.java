@@ -11,6 +11,18 @@ public class TestBalls {
 		Point c = new Point(0, 2);
 		Point[] tab = {a, b, c};
 		Balls ballons = new Balls(tab);
-		System.out.println(ballons.toString());
+
+		System.out.println("Initialisation : ");
+		System.out.println(ballons);
+		ballons.translate(3, 2);
+
+		System.out.println("Deplacement de 3, 2 : ");
+		System.out.println(ballons);
+
+		ballons.reInit();
+		System.out.println("Retour à l'origine : ");
+		System.out.println(ballons);
+
+
 	}
 }
