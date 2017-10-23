@@ -13,7 +13,19 @@ public class Balls {
         tabBalle[k] = balls[k]; //Attention soft copy
       }
     }
+    void translate(int dx, int dy){
+      for (int i = 0; i < this.tabBalle.length; i++) {
+        this.tabBalle[i].x += dx;
+        dxTotal += dx;
+        this.tabBalle[i].y += dy;
+        dyTotal += dy;
+      }
 
+    void reInit(){
+      for (int i = 0; i < this.tabBalle.length; i++) {
+        this.tabBalle[i].x -= dxTotal;
+        this.tabBalle[i].y -= dyTotal;
+      }
     @Override
     public String toString() {
         String reponse = "[";
