@@ -10,10 +10,15 @@ public class Balls {
       int nbBalles = balls.length;
       tabBalle = new Point[nbBalles];
       for (int k =0; k < nbBalles; k++){
-        tabBalle[k] = balls[k]; //Attention soft copy
+        tabBalle[k] = balls[k];
       }
     }
-    void translate(int dx, int dy){
+
+    public Point[] getBalls() {
+        return this.tabBalle;
+    }
+
+    public void translate(int dx, int dy){
       dxTotal += dx;
       dyTotal += dy;
       for (int i = 0; i < this.tabBalle.length; i++) {
@@ -22,11 +27,13 @@ public class Balls {
       }
     }
 
-    void reInit(){
+    public void reInit(){
       for (int i = 0; i < this.tabBalle.length; i++) {
         this.tabBalle[i].x -= dxTotal;
         this.tabBalle[i].y -= dyTotal;
       }
+      dxTotal = 0;
+      dyTotal = 0;
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Balls {
         for (int i = 0; i < longeur - 1 ; i++) {
             reponse  += "(" + tabBalle[i].x  + ", " + tabBalle[i].y + "), ";
         }
-        reponse += "(" + tabBalle[longeur - 1].x + ", " + tabBalle[longeur - 1].y + ") ]";
+        reponse += "(" + tabBalle[longeur - 1].x + ", " + tabBalle[longeur - 1].y + ")]";
         return reponse;
     }
 }
