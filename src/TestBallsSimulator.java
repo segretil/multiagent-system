@@ -7,8 +7,8 @@ public class TestBallsSimulator {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
         // On choisit arbitrairement de créer trois balles par défaut
         Point a = new Point(0, 0);
-        Point b = new Point(100, 1);
-        Point c = new Point(200, 2);
+        Point b = new Point(100, 400);
+        Point c = new Point(350, 150);
         Point[] tab = {a, b, c};
         gui.setSimulable(new BallsSimulator(tab, gui));
     }
