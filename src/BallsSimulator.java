@@ -42,11 +42,11 @@ public class BallsSimulator implements Simulable {
             int y = this.balles[i].getBalls()[0].y;
             // Changer le 490 par la taille de la window - 10 (la moitie du cercle)
             // Je sais pas comment la recuperer lire la doc
-            if (x < 0 || x > 490) {
+            if (x < 5 || x > 490) {
                 this.dx[i] *= -1;
                 this.balles[i].translate(this.dx[i] * 2, 0);
             }
-            if (y > 490 || y < 0) {
+            if (y > 490 || y < 5) {
                 this.dy[i] *= -1;
                 this.balles[i].translate(0, this.dy[i] * 2);
             }

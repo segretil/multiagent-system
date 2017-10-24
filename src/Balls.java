@@ -2,7 +2,6 @@ import gui.*;
 import java.awt.Point;
 
 public class Balls {
-    // La window est toujours de taille 500 par 500
     private Point[] tabBalle;
     private int dxTotal = 0;
     private int dyTotal = 0;
