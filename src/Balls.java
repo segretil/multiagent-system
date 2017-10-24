@@ -6,13 +6,18 @@ public class Balls {
     private Point[] tabBalle;
     private int dxTotal = 0;
     private int dyTotal = 0;
+    private int[] dxTotallocal;
+    private int[] dyTotallocal;
     public Color colorcercle;
     public Color colorinside;
     private int rayon;
+    private int nbBalles;
 
     public Balls(Point[] balls) {
-      int nbBalles = balls.length;
+      nbBalles = balls.length;
       tabBalle = new Point[nbBalles];
+      dxTotallocal = new int[nbBalles];
+      dyTotallocal = new int[nbBalles];
       // Default White
       colorcercle = Color.WHITE;
       colorinside = Color.WHITE;
@@ -21,6 +26,10 @@ public class Balls {
       for (int k =0; k < nbBalles; k++){
         tabBalle[k] = balls[k];
       }
+    }
+
+    public int getNbBalles(){
+      return nbBalles;
     }
 
     public int getRayon(){
@@ -40,14 +49,28 @@ public class Balls {
       }
     }
 
+    public void translateBallIndice(int dx, int dy, int indiceBall){
+      if (indiceBall >= nbBalles || indiceBall < 0){
+        throw new IllegalArgumentException("Indice n'est pas correct");
+      }
+      this.tabBalle[indiceBall].x += dx;
+      this.tabBalle[indiceBall].y += dy;
+      dxTotallocal[indiceBall] += dx;
+      dyTotallocal[indiceBall] += dy;
+    }
+
     public void reInit(){
       for (int i = 0; i < this.tabBalle.length; i++) {
-        this.tabBalle[i].x -= dxTotal;
-        this.tabBalle[i].y -= dyTotal;
+        this.tabBalle[i].x -= dxTotal + dxTotallocal[i];
+        this.tabBalle[i].y -= dyTotal + dyTotallocal[i];
+        dxTotallocal[i] = 0;
+        dyTotallocal[i] = 0;
       }
       dxTotal = 0;
       dyTotal = 0;
     }
+
+
 
     @Override
     public String toString() {
