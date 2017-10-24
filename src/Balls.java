@@ -1,17 +1,30 @@
 import gui.*;
 import java.awt.Point;
+import java.awt.Color;
 
 public class Balls {
     private Point[] tabBalle;
     private int dxTotal = 0;
     private int dyTotal = 0;
+    public Color colorcercle;
+    public Color colorinside;
+    private int rayon;
 
     public Balls(Point[] balls) {
       int nbBalles = balls.length;
       tabBalle = new Point[nbBalles];
+      // Default White
+      colorcercle = Color.WHITE;
+      colorinside = Color.WHITE;
+      // Default rayon
+      rayon = 10;
       for (int k =0; k < nbBalles; k++){
         tabBalle[k] = balls[k];
       }
+    }
+
+    public int getRayon(){
+      return rayon;
     }
 
     public Point[] getBalls() {

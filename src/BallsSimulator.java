@@ -29,7 +29,9 @@ public class BallsSimulator implements Simulable {
         this.window.reset();
         for (int i = 0; i < this.balles.length; i++) {
             this.window.addGraphicalElement(
-            new Oval(this.balles[i].getBalls()[0].x, this.balles[i].getBalls()[0].y, Color.WHITE, Color.WHITE, 10));
+            new Oval(this.balles[i].getBalls()[0].x,
+            this.balles[i].getBalls()[0].y, balles[i].colorinside, balles[i].colorcercle,
+            balles[i].getRayon()));
         }
     }
 
@@ -42,11 +44,12 @@ public class BallsSimulator implements Simulable {
             int y = this.balles[i].getBalls()[0].y;
             // Changer le 490 par la taille de la window - 10 (la moitie du cercle)
             // Je sais pas comment la recuperer lire la doc
-            if (x < 5 || x > 490) {
+            if (x < balles[i].getRayon()/2 || x > 500 - balles[i].getRayon()/2) {
                 this.dx[i] *= -1;
+                // On translate 2 fois pour revenir en dehors du cadre
                 this.balles[i].translate(this.dx[i] * 2, 0);
             }
-            if (y > 490 || y < 5) {
+            if (y > 500 - balles[i].getRayon()|| y < balles[i].getRayon()/2) {
                 this.dy[i] *= -1;
                 this.balles[i].translate(0, this.dy[i] * 2);
             }
