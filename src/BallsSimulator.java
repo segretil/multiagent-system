@@ -41,7 +41,7 @@ public class BallsSimulator implements Simulable {
             int y = this.balles.getBalls()[i].y;
             // Changer le 490 par la taille de la window - 10 (la moitie du cercle)
             // Je sais pas comment la recuperer lire la doc
-            if (x < balles.getRayon()/2 || x > 500 - balles.getRayon()/2) {
+            if (x < balles.getRayon() || x > 500 - balles.getRayon()/2) {
                 this.dx[i] *= -1;
                 // On translate 2 fois pour revenir en dedans du cadre
                 this.balles.translateBallIndice(this.dx[i] * 2, 0, i);

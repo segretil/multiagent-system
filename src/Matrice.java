@@ -10,22 +10,23 @@ public class Matrice {
     private int nbVivant;
 
     public Matrice(int xTotal, int yTotal, Point[] vivants) {
+        //On accepte les doublons dans les vivants
         this.matrice = new boolean[xTotal][yTotal];
         this.nbVivant = vivants.length;
+        this.tailleX = xTotal;
+        this.tailleY = yTotal;
         for (int i = 0; i < xTotal; i++) {
             for (int j = 0; j < yTotal; j++) {
                 this.matrice[i][j] = false;
             }
         }
         for (Point vivant : vivants) {
+            //Gestion des doublons
             if (this.matrice[vivant.x][vivant.y]) {
                 nbVivant --;
             }
             this.matrice[vivant.x][vivant.y] = true;
         }
-        this.tailleX = xTotal;
-        this.tailleY = yTotal;
-        this.matriceFutur = this.matrice;
     }
 
     private int voisins(int x, int y) {

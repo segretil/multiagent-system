@@ -25,7 +25,7 @@ public class ConwaySimulator implements Simulable {
     }
 
     private void affiche_rect(Point point) {
-        this.window.addGraphicalElement(new Rectangle(point.x*50+25, point.y*50+25, Color.WHITE, Color.WHITE, 50));
+        this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.WHITE, Color.WHITE, 50));
     }
 
     @Override
