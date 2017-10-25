@@ -21,36 +21,21 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testGUI testBalls testBallsSimulator testConwaySimulator
+TARGET = testGUI testBalls testBallsSimulator testConwaySimulator
 
-testGUI:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestGUI.java
+all: $(TARGET)
 
-testBalls:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBalls.java
-
-testBallsSimulator:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBallsSimulator.java
-
-testConwaySimulator:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestConwaySimulator.java
+test%:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/Test$*.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin TestGUI
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeIHM
-exeGUI:
-	java -classpath bin:bin/gui.jar TestGUI
 
-exeBalls:
-	java -classpath bin:bin/gui.jar TestBalls
-
-exeBallsSimulator:
-	java -classpath bin:bin/gui.jar TestBallsSimulator
-
-exeConwaySimulator:
-	java -classpath bin:bin/gui.jar TestConwaySimulator
+exe%:
+	java -classpath bin:bin/gui.jar Test$*
 
 clean:
 	rm -rf bin/*.class
