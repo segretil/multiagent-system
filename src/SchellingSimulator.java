@@ -33,13 +33,13 @@ public class SchellingSimulator implements Simulable {
         switch (state)
         {
           case 0:
-          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.WHITE, Color.WHITE, 50));
+          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.WHITE, Color.WHITE, 45));
           break;
           case 1:
-          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.RED, Color.RED, 50));
+          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.RED, Color.RED, 45));
             break;
           case 2:
-          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.BLUE, Color.BLUE, 50));
+          this.window.addGraphicalElement(new Rectangle(point.x*50 + 25, point.y*50 + 25, Color.BLUE, Color.BLUE, 45));
             break;
           default:
         }

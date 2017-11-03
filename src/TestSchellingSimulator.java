@@ -9,41 +9,60 @@ import java.util.HashMap;
 public class TestSchellingSimulator {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
-        // On choisit arbitrairement de créer trois balles par défaut
-        int seuil = 3;
+        int seuil = 4;
+        //Ne peut pas depasser 3 états
         int etats = 3;
+        int nbrlines = 10;
+        //nbrmax de vivants doit toujours < nbrlines**2
+        int nbrmaxvivants = 80;
 
-        Point p1 = new Point(0, 0);
-        Point p2 = new Point(0, 1);
-        Point p3 = new Point(0, 2);
-        Point p4 = new Point(1, 0);
-        Point p5 = new Point(1, 1);
-        Point p6 = new Point(1, 2);
-        Point p7 = new Point(2, 0);
-        Point p8 = new Point(2, 1);
-        Point p9 = new Point(2, 2);
-
-        HashMap<Point, Integer> hell = new HashMap<Point, Integer>();
-        hell.put(p1, 1);
-        hell.put(p2, 0);
-        hell.put(p6, 1);
-        hell.put(p8, 2);
-        hell.put(p5, 0);
-        hell.put(p4, 2);
-
-
+        HashMap<Point, Integer> vivants = new HashMap<Point, Integer>();
         Queue <Point > emptypoints = new LinkedList <Point > ();
-        emptypoints.add(p3);
-        emptypoints.add(p7);
-        emptypoints.add(p9);
 
-        gui.setSimulable(new SchellingSimulator(etats, seuil, hell, emptypoints, gui));
-        //SchellingStructure simu = new SchellingStructure(etats, seuil, hell, emptypoints);
-        //simu.execute();
-        //simu.execute();
+        initialisationVivants(nbrmaxvivants, nbrlines,
+        etats, vivants);
+        initialisationEmptypoints(nbrlines,
+        vivants, emptypoints);
 
-
+        gui.setSimulable(new SchellingSimulator(etats, seuil, vivants, emptypoints, gui));
 
 
     }
+
+
+    public static void initialisationVivants(int nbrmaxvivants, int nbrlines,
+    int etats, HashMap<Point, Integer> vivants){
+        //initialisation des vivants
+        for (int indiceVivant = 0; indiceVivant < nbrmaxvivants; indiceVivant ++){
+            //tirage aléatoire de l'état et de la position des points
+            int indice = (int) (Math.random() * nbrlines * nbrlines);
+            int etat = (int) (Math.random() * etats);
+            Point newPoint = new Point(indice%nbrlines, indice/nbrlines);
+            //Pour eviter d'avoir des doublons dans les vivants
+
+            while (vivants.containsKey(newPoint)){
+                indice = (int) (Math.random() * nbrlines * nbrlines);
+                newPoint = new Point(indice%nbrlines, indice/nbrlines);
+            }
+
+            vivants.put(newPoint, etat);
+        }
+
+    }
+
+
+    public static void initialisationEmptypoints(int nbrlines,
+    HashMap<Point, Integer> vivants, Queue <Point > emptypoints){
+        //initialisation des emptypoints
+        for (int indice = 0; indice < nbrlines * nbrlines; indice++){
+            Point newPoint = new Point(indice%nbrlines, indice/nbrlines);
+
+            if (!(vivants.containsKey(newPoint))){
+                emptypoints.add(newPoint);
+            }
+
+        }
+
+    }
+
 }

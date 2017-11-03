@@ -44,8 +44,6 @@ public class SchellingStructure{
     public void change(Point point){
         int nbreVoisins = this.comptevoisinsetat(point);
         int etat = schelling.get(point);
-        System.out.println(point);
-        System.out.println(nbreVoisins);
         if (nbreVoisins >= seuil){
             futureschelling.remove(point);
             emptypoints.add(point);
