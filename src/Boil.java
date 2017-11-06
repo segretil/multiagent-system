@@ -3,7 +3,7 @@ public class Boil {
     PVector velocity;
     PVector acceleration;
     // Maximum speed
-    float maxspeed;
+    double maxspeed;
     // Now we also have maximum force.
-    float maxforce;
+    double maxforce;
 }
