@@ -1,10 +1,8 @@
-import math;
-
 public class PVector {
-    float x;
-    float y;
+    public double x;
+    public double y;
 
-    public PVector(float x, float y){
+    public PVector(double x, double y){
         this.x = x;
         this.y = y;
     }
@@ -19,14 +17,14 @@ public class PVector {
         this.y -= vecteur.y;
     }
 
-    public float norm(){
-        return math.sqrt(x**2 + y**2);
+    public double norm(){
+        return Math.sqrt(x*x + y*y);
     }
 
-    public void limit(float max){
-        float hypothenuse = this.norm();
+    public void limit(double max){
+        double hypothenuse = this.norm();
         if (hypothenuse > max){
-            this.y = math.sqrt(h**2 - this.x**2);
+            this.y = Math.sqrt(hypothenuse*hypothenuse - x*x);
         }
     }
 }
