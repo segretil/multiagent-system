@@ -35,8 +35,13 @@ public class PVector {
 
     public void setMag(double max){
         double hypothenuse = this.norm();
-        this.div(hypothenuse);
-        this.mult(max);
+        if (hypothenuse == 0){
+            this.y = -max;
+            this.x = 0;
+        } else {
+            this.div(hypothenuse);
+            this.mult(max);
+        }
     }
 
     public void mult(double lambda){
@@ -53,7 +58,15 @@ public class PVector {
         return Math.sqrt((vector.x - x)*(vector.x - x) + (vector.y - y)*(vector.y - y));
     }
 
+    public static double distance(PVector vector, PVector vector2){
+        return Math.sqrt((vector.x - vector2.x)*(vector.x - vector2.x) + (vector.y - vector2.y)*(vector.y - vector2.y));
+    }
+
     public static PVector sub(PVector vector1, PVector vector2){
         return new PVector(vector2.x - vector1.x, vector2.y - vector1.y);
+    }
+
+    public static PVector add(PVector vector1, PVector vector2){
+        return new PVector(vector2.x + vector1.x, vector2.y + vector1.y);
     }
 }
