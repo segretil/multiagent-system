@@ -9,6 +9,7 @@ public class BoidSimulator implements Simulable{
 
     public BoidSimulator(ArrayList<Boid> boidsTot, GUISimulator window, EventManager manager) {
         this.manager = manager;
+        // Ensemble de tous les boids
         this.boidsTotal = boidsTot;
         this.window = window;
         this.origin = copy(boidsTotal);
@@ -16,9 +17,12 @@ public class BoidSimulator implements Simulable{
     }
 
     private void afficher() {
+        /*
+        Affichage graphique des boids
+         */
         this.window.reset();
         for (Boid boid : boidsTotal) {
-            this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, boid.getColor(), boid.getColor(), boid.size));
+            this.window.addGraphicalElement(new Oval((int) boid.getLocation().x, (int) boid.getLocation().y, boid.getColor(), boid.getColor(), boid.getSize()));
         }
     }
 
@@ -30,11 +34,14 @@ public class BoidSimulator implements Simulable{
 
     @Override
     public void restart(){
+        /*
+        Ici on ne reset pas le manager car sinon on a plus accès aux différentes populations des boids
+         */
         this.softCopy(copy(origin));
         afficher();
     }
 
-    public ArrayList<Boid> copy(ArrayList<Boid> boids){
+    private ArrayList<Boid> copy(ArrayList<Boid> boids){
         ArrayList<Boid> copy = new ArrayList<Boid>();
         for (Boid boid : boids){
             copy.add(new Boid(boid));
@@ -42,12 +49,12 @@ public class BoidSimulator implements Simulable{
         return copy;
     }
 
-    public void softCopy(ArrayList<Boid> boids){
+    private void softCopy(ArrayList<Boid> boids){
         int compteur = 0;
         for (Boid pBoid : boidsTotal){
-            pBoid.location = new PVector(boids.get(compteur).location);
-            pBoid.velocity = new PVector(boids.get(compteur).velocity);
-            pBoid.acceleration = new PVector(boids.get(compteur).acceleration);
+            pBoid.setLocation(new PVector(boids.get(compteur).getLocation()));
+            pBoid.setVelocity(new PVector(boids.get(compteur).getVelocity()));
+            pBoid.setAcceleration(new PVector(boids.get(compteur).getAcceleration()));
             compteur ++;
         }
 

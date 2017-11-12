@@ -2,21 +2,25 @@ import java.awt.*;
 import java.util.*;
 
 public class Boid {
-    PVector location;
-    PVector velocity;
-    PVector acceleration;
-    // Maximum speed
-    double maxspeed;
-    // Now we also have maximum force.
-    double maxforce;
-    int size;
+    private PVector location;
+    private PVector velocity;
+    private PVector acceleration;
+    // Ne peut pas aller plus que la vitesse maximum
+    private double maxspeed;
+    //Ne peut pas subire une force supérieure à maxForce
+    private double maxforce;
+    private int size;
     private Color color;
-    double coefCoh;
-    double coefAli;
-    double coefSep;
+    //Les 3 attributs suivants servent à faire varier les règles qui s'appliquent sur un boid
+    private double coefCoh;
+    private double coefAli;
+    private double coefSep;
 
     public Boid(double x, double y, Color colour, double coefficientCohesion,
                 double coefficientAlignement, double coefficientSeparation){
+        /*
+        On définit ici arbitrairement certaines valeurs
+         */
         location = new PVector(x, y);
         velocity = new PVector(0, 0);
         acceleration = new PVector(0, 0);
@@ -34,6 +38,9 @@ public class Boid {
     }
 
     public Boid(Boid boid){
+        /*
+        Constructeur servant pour faire une deepCopy
+         */
         location = new PVector(boid.location);
         velocity = new PVector(boid.velocity);
         acceleration = new PVector(boid.acceleration);
@@ -43,16 +50,48 @@ public class Boid {
         color = boid.color;
     }
 
+    public PVector getLocation() {
+        return location;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setAcceleration(PVector acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setLocation(PVector location) {
+        this.location = location;
+    }
+
+    public void setVelocity(PVector velocity) {
+        this.velocity = velocity;
+    }
+
+    public PVector getAcceleration() {
+        return acceleration;
+    }
+
+    public PVector getVelocity() {
+        return velocity;
+    }
+
     public Color getColor() {
         return color;
     }
 
     public PVector align(ArrayList<Boid> boids){
+        /*
+        Calcul de la force d'alignement
+         */
         PVector sum = new PVector(0,0);
         double voisinsDistanceMax = 50;
         int compteur = 0;
         for (Boid other : boids) {
             double distance = location.distance(other.location);
+            // On regarde les voisins à une distance de 50 et on fait la moyenne de leur vitesse
             if ((distance > 0) && (distance < voisinsDistanceMax)){
                 sum.add(other.velocity);
                 compteur ++;
@@ -60,9 +99,11 @@ public class Boid {
         }
         if (compteur > 0){
             sum.div(compteur);
+            //On veut ici que le boid aille à la vitesse maxium vers son objectif
             sum.setMag(maxspeed);
-
+            // Le sub sert à rendre le mouvement plus réaliste
             sum.sub(velocity);
+            // On évite ici la divergence
             sum.limit(maxforce);
             return new PVector(sum);
         } else {
@@ -72,6 +113,10 @@ public class Boid {
     }
 
     public PVector cohesion(ArrayList<Boid> boids){
+        /*
+        Calcul la force de cohesion
+        Dans l'idée ressemble beaucoup à align
+         */
         PVector sum = new PVector(0,0);
         double voisinsDistanceMax = 50;
         int compteur = 0;
@@ -92,6 +137,9 @@ public class Boid {
     }
 
     public PVector seek(PVector target){
+        /*
+        Ayant une cible permet de calculer la force pour y arriver
+         */
         PVector voulu = PVector.sub(target, this.location);
         voulu.setMag(maxspeed);
         voulu.sub(velocity);
@@ -101,6 +149,9 @@ public class Boid {
     }
 
     public void applyRules(ArrayList<Boid> boids){
+        /*
+        Applique toutes les règles
+         */
         PVector cohesion = cohesion(boids);
         cohesion.mult(coefCoh);
         PVector align = align(boids);
@@ -111,7 +162,7 @@ public class Boid {
         acceleration = PVector.add(cohesion, align);
         acceleration.add(separation);
 
-
+        //Règles du poly
         velocity.add(acceleration);
         velocity.limit(maxspeed);
         location.add(velocity);
@@ -133,6 +184,9 @@ public class Boid {
     }
 
     public PVector separate (ArrayList<Boid> boids) {
+        /*
+        Calcul la force de séparation
+         */
         float desiredseparation = size*4;
         PVector sum = new PVector(0, 0);
         int count = 0;
