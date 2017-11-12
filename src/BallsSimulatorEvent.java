@@ -51,6 +51,7 @@ public class BallsSimulatorEvent implements Simulable {
             balles.dx[k] = 5;
             balles.dy[k] = 5;
         }
+        balles.setDate(0);
         manager.addEvent(balles);
         Afficher();
     }
