@@ -10,10 +10,10 @@ public class BoidSimulator implements Simulable{
 
     public BoidSimulator(ArrayList<Boid> boids, GUISimulator window) {
         manager = new EventManager();
-        swarm = new EssainBoids(boids, manager);
+        swarm = new EssainBoids(boids, manager, Color.WHITE);
         manager.addEvent(swarm);
         this.window = window;
-        this.origin = copy(boids);
+        this.origin = copy(swarm.getBoids());
         afficher();
     }
 
@@ -21,7 +21,7 @@ public class BoidSimulator implements Simulable{
         this.window.reset();
         ArrayList<Boid> boids = swarm.getBoids();
         for (Boid boid : boids) {
-            this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, Color.WHITE, Color.WHITE, boid.size));
+            this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, swarm.getColor(), swarm.getColor(), boid.size));
         }
     }
 

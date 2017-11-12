@@ -1,13 +1,16 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 public class EssainBoids extends Event{
     private ArrayList<Boid> boids;
     private EventManager manager;
+    private Color color;
 
-    public EssainBoids(ArrayList<Boid> essain, EventManager manager){
+    public EssainBoids(ArrayList<Boid> essain, EventManager manager, Color couleur){
         super(0);
         this.manager = manager;
         this.boids = essain;
+        this.color = couleur;
     }
 
     @Override
@@ -17,6 +20,10 @@ public class EssainBoids extends Event{
         }
         this.setDate(getDate() + 1);
         manager.addEvent(this);
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public void setBoids(ArrayList<Boid> boids) {
