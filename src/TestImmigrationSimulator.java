@@ -10,7 +10,6 @@ public class TestImmigrationSimulator {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
         int seuil = 3;
-        //Ne peut pas depasser 3 états
         int etats = 4;
         int nbrlines = 10;
         //nbrmax de vivants doit toujours faire la totalite du tableau
