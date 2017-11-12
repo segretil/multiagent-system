@@ -21,7 +21,7 @@ public class TestImmigrationSimulator {
         initialisationVivants(nbrmaxvivants, nbrlines,
         etats, vivants);
 
-        gui.setSimulable(new ImmigrationSimulator(etats, seuil, vivants, gui));
+        gui.setSimulable(new ImmigrationSimulatorEvent(etats, seuil, vivants, gui));
 
 
     }

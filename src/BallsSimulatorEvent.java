@@ -44,13 +44,14 @@ public class BallsSimulatorEvent implements Simulable {
     @Override
     public void restart() {
         // Remet les balles à leur origine
-        this.balles.reInit();
         manager.restart();
+        this.balles.reInit();
         for (int k =0; k < balles.getNbBalles(); k++){
             //Default speed
             balles.dx[k] = 5;
             balles.dy[k] = 5;
         }
+        manager.addEvent(balles);
         Afficher();
     }
 }
