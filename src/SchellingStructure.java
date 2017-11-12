@@ -7,19 +7,22 @@ import java.util.Set;
 
 
 
-public class SchellingStructure{
+public class SchellingStructure extends Event{
     private int nbrstates;
     private int seuil;
     HashMap<Point, Integer> schelling = new HashMap<Point, Integer>();
     HashMap<Point, Integer> futureschelling = new HashMap<Point, Integer>();
     private Queue <Point > emptypoints = new LinkedList <Point > ();
+    private EventManager manager;
 
     public SchellingStructure(int etats, int step, HashMap<Point, Integer> points,
-    Queue <Point > pointssanspop){
+    Queue <Point > pointssanspop, EventManager manager){
+        super(0);
         nbrstates = etats;
         seuil = step;
         schelling = points;
         emptypoints = pointssanspop;
+        this.manager = manager;
     }
 
     public int comptevoisinsetat(Point point){
@@ -63,13 +66,15 @@ public class SchellingStructure{
             change(point);
         }
         this.schelling = this.futureschelling;
+        this.setDate(getDate() + 1);
+        manager.addEvent(this);
     }
 
     public SchellingStructure copie(){
         // On copie la structure pour pouvoir la garder en memoire
         // Avec la file d'attente emptypoints qui ne se copie pas
         SchellingStructure cop = new SchellingStructure(nbrstates, seuil,
-        new HashMap<Point, Integer>(schelling), emptypoints);
+        new HashMap<Point, Integer>(schelling), emptypoints, manager);
         return cop;
     }
 
@@ -77,7 +82,7 @@ public class SchellingStructure{
         // On copie la structure pour pouvoir la garder en memoire
         // Avec la file d'attente emptypoints qui se copie elle aussi
         SchellingStructure cop = new SchellingStructure(nbrstates, seuil,
-        new HashMap<Point, Integer>(schelling), new LinkedList<Point>(emptypoints));
+        new HashMap<Point, Integer>(schelling), new LinkedList<Point>(emptypoints), manager);
         return cop;
     }
 

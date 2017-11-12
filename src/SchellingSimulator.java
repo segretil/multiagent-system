@@ -10,11 +10,14 @@ public class SchellingSimulator implements Simulable {
     private SchellingStructure simu;
     private SchellingStructure origine;
     private GUISimulator window;
+    private EventManager manager;
 
     public SchellingSimulator(int etats,int step, HashMap<Point, Integer> points,
     Queue <Point > pointssanspop, GUISimulator window) {
         // On crée la Schelling des vivants du jeu de la vie
-        this.simu = new SchellingStructure(etats, step, points, pointssanspop);
+        this.manager = new EventManager();
+        this.simu = new SchellingStructure(etats, step, points, pointssanspop, manager);
+        this.manager.addEvent(this.simu);
         this.origine = this.simu.copiedeep();
         this.window = window;
         afficher();
@@ -50,7 +53,7 @@ public class SchellingSimulator implements Simulable {
     @Override
     public void next() {
         // On passe à l'étape suivante du jeu de la vie
-        simu.execute();
+        manager.next();
         afficher();
     }
 
@@ -58,6 +61,9 @@ public class SchellingSimulator implements Simulable {
     public void restart() {
         // Remet les points à leur point d'origine
         this.simu = this.origine.copiedeep();
+        this.simu.setDate(0);
+        this.manager.restart();
+        this.manager.addEvent(this.simu);
         afficher();
     }
 }
