@@ -11,8 +11,12 @@ public class Boid {
     double maxforce;
     int size;
     private Color color;
+    double coefCoh;
+    double coefAli;
+    double coefSep;
 
-    public Boid(double x, double y, Color colour){
+    public Boid(double x, double y, Color colour, double coefficientCohesion,
+                double coefficientAlignement, double coefficientSeparation){
         location = new PVector(x, y);
         velocity = new PVector(0, 0);
         acceleration = new PVector(0, 0);
@@ -20,6 +24,13 @@ public class Boid {
         maxforce = 0.1;
         size = 5;
         color = colour;
+        this.coefCoh = coefficientCohesion;
+        this.coefAli = coefficientAlignement;
+        this.coefSep = coefficientSeparation;
+    }
+
+    public Boid(double x, double y, Color colour){
+        this(x, y, colour, 1, 1, 1);
     }
 
     public Boid(Boid boid){
@@ -91,8 +102,11 @@ public class Boid {
 
     public void applyRules(ArrayList<Boid> boids){
         PVector cohesion = cohesion(boids);
+        cohesion.mult(coefCoh);
         PVector align = align(boids);
+        align.mult(coefAli);
         PVector separation = separate(boids);
+        separation.mult(coefSep);
 
         acceleration = PVector.add(cohesion, align);
         acceleration.add(separation);
