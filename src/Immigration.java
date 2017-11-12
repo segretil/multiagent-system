@@ -10,14 +10,12 @@ public class Immigration {
     HashMap<Point, Integer> immigration = new HashMap<Point, Integer>();
     HashMap<Point, Integer> futureImmigration = new HashMap<Point, Integer>();
 
-    // j'ai modifier
     public Immigration(int etats, int step, HashMap<Point, Integer> points){
         nbrstates = etats;
         seuil = step;
         immigration = points;
     }
 
-    // j'ai modifier
     public int comptevoisinsetat(Point point){
         //compte le nombre de voisins du point qui sont dans un etat k+1 (mod n)
         int nbVoisins = 0;
@@ -65,7 +63,6 @@ public class Immigration {
     // j'ai modifier
     public Immigration copie(){
         // On copie la structure pour pouvoir la garder en memoire
-        // Avec la file d'attente emptypoints qui ne se copie pas
         Immigration cop = new Immigration(nbrstates, seuil,
         new HashMap<Point, Integer>(immigration));
         return cop;

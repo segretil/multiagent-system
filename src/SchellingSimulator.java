@@ -29,7 +29,9 @@ public class SchellingSimulator implements Simulable {
     }
 
     private void affiche_rect(Point point) {
+        // Affiche le bon rectangle en fonction de l'etat du point
         int state = this.simu.schelling.get(point);
+        // Si l'on veut augmenter le nombre d'etats, il faut rajouter des case
         switch (state)
         {
           case 0:

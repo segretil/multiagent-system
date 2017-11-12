@@ -1,18 +1,38 @@
 import gui.*;
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.HashMap;
 
 public class TestConwaySimulator {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
-        // On choisit arbitrairement de créer trois balles par défaut
-        int nbVivants = (int)(Math.random() * 90);
-        Point[] tab = new Point[nbVivants];
-        for (int i = 0; i < nbVivants; i++) {
-            int x = (int) (Math.random() * 10);
-            int y = (int) (Math.random() * 10);
-            tab[i] = new Point(x,y);
-        }
-        gui.setSimulable(new ConwaySimulator(500, 500, tab, gui));
+        int nbrlines = 10;
+        //nbrmax de vivants doit toujours faire la totalite du tableau
+        int nbrmaxvivants = nbrlines * nbrlines;
+
+        HashMap<Point, Integer> vivants = new HashMap<Point, Integer>();
+
+        initialisationVivants(nbrmaxvivants, nbrlines,
+        2, vivants);
+
+        gui.setSimulable(new ConwaySimulatorEvent(vivants, gui));
+
+
     }
+
+
+    public static void initialisationVivants(int nbrmaxvivants, int nbrlines,
+    int etats, HashMap<Point, Integer> vivants){
+        //initialisation des vivants
+        for (int indiceVivant = 0; indiceVivant < nbrmaxvivants; indiceVivant ++){
+            //tirage aléatoire de l'état et de la position des points
+            int etat = (int) (Math.random() * etats);
+            Point newPoint = new Point(indiceVivant%nbrlines, indiceVivant/nbrlines);
+            vivants.put(newPoint, etat);
+        }
+
+    }
+
 }

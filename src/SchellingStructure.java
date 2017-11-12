@@ -42,6 +42,7 @@ public class SchellingStructure{
     }
 
     public void change(Point point){
+        // Change l'etat du point actuel
         int nbreVoisins = this.comptevoisinsetat(point);
         int etat = schelling.get(point);
         if (nbreVoisins >= seuil){
@@ -55,6 +56,7 @@ public class SchellingStructure{
     }
 
     public void execute(){
+        // On execute un tour de passe sur tous les vivants
         this.futureschelling = this.copie().schelling;
         Set<Point> temp = schelling.keySet();
         for (Point point : temp){
@@ -64,12 +66,16 @@ public class SchellingStructure{
     }
 
     public SchellingStructure copie(){
+        // On copie la structure pour pouvoir la garder en memoire
+        // Avec la file d'attente emptypoints qui ne se copie pas
         SchellingStructure cop = new SchellingStructure(nbrstates, seuil,
         new HashMap<Point, Integer>(schelling), emptypoints);
         return cop;
     }
 
     public SchellingStructure copiedeep(){
+        // On copie la structure pour pouvoir la garder en memoire
+        // Avec la file d'attente emptypoints qui se copie elle aussi
         SchellingStructure cop = new SchellingStructure(nbrstates, seuil,
         new HashMap<Point, Integer>(schelling), new LinkedList<Point>(emptypoints));
         return cop;

@@ -21,7 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-TARGET = testGUI testBalls testBallsSimulator testConwaySimulator
+TARGET = testGUI testBalls testBallsSimulator testConwaySimulator testSchellingSimulator testBoidSimulator testImmigrationSimulator testConwaySimulatorEvent
 
 all: $(TARGET)
 
