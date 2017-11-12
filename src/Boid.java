@@ -14,7 +14,7 @@ public class Boid {
 
     public Boid(double x, double y, Color colour){
         location = new PVector(x, y);
-        velocity = new PVector(1, 0);
+        velocity = new PVector(0, 0);
         acceleration = new PVector(0, 0);
         maxspeed = 4;
         maxforce = 0.1;

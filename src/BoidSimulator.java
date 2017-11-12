@@ -3,22 +3,21 @@ import java.util.*;
 
 public class BoidSimulator implements Simulable{
     private GUISimulator window;
-    private EssainBoids swarm;
+    private ArrayList<Boid> boidsTotal;
     private ArrayList<Boid> origin;
     private EventManager manager;
 
-    public BoidSimulator(EssainBoids essain, GUISimulator window, EventManager manager) {
+    public BoidSimulator(ArrayList<Boid> boidsTot, GUISimulator window, EventManager manager) {
         this.manager = manager;
-        swarm = essain;
+        this.boidsTotal = boidsTot;
         this.window = window;
-        this.origin = copy(swarm.getBoids());
+        this.origin = copy(boidsTotal);
         afficher();
     }
 
     private void afficher() {
         this.window.reset();
-        ArrayList<Boid> boids = swarm.getBoids();
-        for (Boid boid : boids) {
+        for (Boid boid : boidsTotal) {
             this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, boid.getColor(), boid.getColor(), boid.size));
         }
     }
@@ -45,8 +44,7 @@ public class BoidSimulator implements Simulable{
 
     public void softCopy(ArrayList<Boid> boids){
         int compteur = 0;
-        ArrayList<Boid> previousBoids = swarm.getBoids();
-        for (Boid pBoid : previousBoids){
+        for (Boid pBoid : boidsTotal){
             pBoid.location = new PVector(boids.get(compteur).location);
             pBoid.velocity = new PVector(boids.get(compteur).velocity);
             pBoid.acceleration = new PVector(boids.get(compteur).acceleration);
