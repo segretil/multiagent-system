@@ -37,14 +37,13 @@ public class BallsSimulatorEvent implements Simulable {
 
     @Override
     public void next() {
-        // Bouge les balles de 5x et 8y
         manager.next();
         Afficher();
     }
 
     @Override
     public void restart() {
-        // Remet les balles à son origine
+        // Remet les balles à leur origine
         this.balles.reInit();
         manager.restart();
         for (int k =0; k < balles.getNbBalles(); k++){

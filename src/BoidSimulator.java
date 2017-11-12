@@ -4,20 +4,22 @@ import java.util.*;
 
 public class BoidSimulator implements Simulable{
     private GUISimulator window;
-    ArrayList<Boid> boids;
-    ArrayList<Boid> origin;
+    private EssainBoids swarm;
+    private ArrayList<Boid> origin;
+    private EventManager manager;
 
     public BoidSimulator(ArrayList<Boid> boids, GUISimulator window) {
-        // On crée la Schelling des vivants du jeu de la vie
-        this.boids = boids;
+        manager = new EventManager();
+        swarm = new EssainBoids(boids, manager);
+        manager.addEvent(swarm);
         this.window = window;
         this.origin = copy(boids);
         afficher();
     }
 
     private void afficher() {
-        // On affiche la Schelling du jeu de la vie
         this.window.reset();
+        ArrayList<Boid> boids = swarm.getBoids();
         for (Boid boid : boids) {
             this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, Color.WHITE, Color.WHITE, boid.size));
         }
@@ -25,16 +27,14 @@ public class BoidSimulator implements Simulable{
 
     @Override
     public void next() {
-        // On passe à l'étape suivante du jeu de la vie
-        for (Boid boid : boids){
-            boid.applyRules(boids);
-        }
+        manager.next();
         afficher();
     }
 
     @Override
     public void restart(){
-        this.boids = copy(origin);
+        swarm.setBoids(copy(origin));
+        manager.restart();
         afficher();
     }
 
