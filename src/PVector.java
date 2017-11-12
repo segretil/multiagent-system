@@ -36,7 +36,7 @@ public class PVector {
     public void setMag(double max){
         double hypothenuse = this.norm();
         if (hypothenuse == 0){
-            this.y = -max;
+            this.y = 0;
             this.x = 0;
         } else {
             this.div(hypothenuse);

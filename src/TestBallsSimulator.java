@@ -10,6 +10,6 @@ public class TestBallsSimulator {
         Point b = new Point(100, 400);
         Point c = new Point(350, 150);
         Point[] tab = {a, b, c};
-        gui.setSimulable(new BallsSimulator(tab, gui));
+        gui.setSimulable(new BallsSimulatorEvent(tab, gui));
     }
 }

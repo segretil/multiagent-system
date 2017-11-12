@@ -9,5 +9,10 @@ public abstract class Event {
         return date;
     }
 
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+
     public abstract void execute();
 }

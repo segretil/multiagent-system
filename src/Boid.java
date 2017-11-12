@@ -12,9 +12,9 @@ public class Boid {
 
     public Boid(double x, double y){
         location = new PVector(x, y);
-        velocity = new PVector(1, 1);
+        velocity = new PVector(1, 0);
         acceleration = new PVector(0, 0);
-        maxspeed = 5;
+        maxspeed = 4;
         maxforce = 0.1;
         size = 5;
     }
@@ -40,7 +40,7 @@ public class Boid {
             }
         }
         if (compteur > 0){
-            sum.div(boids.size());
+            sum.div(compteur);
             sum.setMag(maxspeed);
 
             sum.sub(velocity);
@@ -59,16 +59,12 @@ public class Boid {
         for (Boid other : boids) {
             double distance = location.distance(other.location);
             if ((distance > 0) && (distance < voisinsDistanceMax)){
-                sum.add(other.velocity);
+                sum.add(other.location);
                 compteur ++;
             }
         }
         if (compteur > 0){
-            sum.div(boids.size());
-            sum.setMag(maxspeed);
-
-            sum.sub(velocity);
-            sum.limit(maxforce);
+            sum.div(compteur);
             return seek(sum);
         } else {
             return new PVector(0, 0);
@@ -93,6 +89,7 @@ public class Boid {
         acceleration = PVector.add(cohesion, align);
         acceleration.add(separation);
 
+
         velocity.add(acceleration);
         velocity.limit(maxspeed);
         location.add(velocity);
@@ -114,7 +111,7 @@ public class Boid {
     }
 
     public PVector separate (ArrayList<Boid> boids) {
-        float desiredseparation = size*2;
+        float desiredseparation = size*4;
         PVector sum = new PVector(0, 0);
         int count = 0;
         for (Boid other : boids) {
