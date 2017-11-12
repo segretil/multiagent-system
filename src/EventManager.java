@@ -3,8 +3,6 @@ import java.util.*;
 public class EventManager {
     private long currentDate = 0;
     private HashMap<Long, ArrayList<Event> > events = new HashMap<>();
-    private HashMap<Long, ArrayList<Event> > origin = new HashMap<>();
-
 
     public void addEvent(Event e){
         if (events.containsKey(e.getDate())){
@@ -13,7 +11,6 @@ public class EventManager {
             ArrayList<Event> ev = new ArrayList<>();
 
             ev.add(e);
-            origin.put(e.getDate(), ev);
             events.put(e.getDate(), ev);
         }
     }
@@ -34,7 +31,7 @@ public class EventManager {
 
     public void restart(){
         currentDate = 0;
-        events = new HashMap<>(origin);
+        events = new HashMap<>();
     }
 
 }

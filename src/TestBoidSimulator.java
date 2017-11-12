@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class TestBoidSimulator {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
-        // On choisit arbitrairement de créer trois balles par défaut
         ArrayList<Boid> boidstotal = new ArrayList<Boid>();
 
 
