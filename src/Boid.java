@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.*;
 
 public class Boid {
@@ -9,14 +10,16 @@ public class Boid {
     // Now we also have maximum force.
     double maxforce;
     int size;
+    private Color color;
 
-    public Boid(double x, double y){
+    public Boid(double x, double y, Color colour){
         location = new PVector(x, y);
         velocity = new PVector(1, 0);
         acceleration = new PVector(0, 0);
         maxspeed = 4;
         maxforce = 0.1;
         size = 5;
+        color = colour;
     }
 
     public Boid(Boid boid){
@@ -26,6 +29,11 @@ public class Boid {
         maxspeed = boid.maxspeed;
         maxforce = boid.maxforce;
         size = boid.size;
+        color = boid.color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public PVector align(ArrayList<Boid> boids){

@@ -1,5 +1,4 @@
 import gui.*;
-import java.awt.Color;
 import java.util.*;
 
 public class BoidSimulator implements Simulable{
@@ -20,7 +19,7 @@ public class BoidSimulator implements Simulable{
         this.window.reset();
         ArrayList<Boid> boids = swarm.getBoids();
         for (Boid boid : boids) {
-            this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, swarm.getColor(), swarm.getColor(), boid.size));
+            this.window.addGraphicalElement(new Oval((int) boid.location.x, (int) boid.location.y, boid.getColor(), boid.getColor(), boid.size));
         }
     }
 
@@ -32,8 +31,7 @@ public class BoidSimulator implements Simulable{
 
     @Override
     public void restart(){
-        swarm.setBoids(copy(origin));
-        manager.restart();
+        this.softCopy(copy(origin));
         afficher();
     }
 
@@ -43,6 +41,18 @@ public class BoidSimulator implements Simulable{
             copy.add(new Boid(boid));
         }
         return copy;
+    }
+
+    public void softCopy(ArrayList<Boid> boids){
+        int compteur = 0;
+        ArrayList<Boid> previousBoids = swarm.getBoids();
+        for (Boid pBoid : previousBoids){
+            pBoid.location = new PVector(boids.get(compteur).location);
+            pBoid.velocity = new PVector(boids.get(compteur).velocity);
+            pBoid.acceleration = new PVector(boids.get(compteur).acceleration);
+            compteur ++;
+        }
+
     }
 
 }
