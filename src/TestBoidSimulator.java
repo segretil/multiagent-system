@@ -30,7 +30,7 @@ public class TestBoidSimulator {
             boidsTotal.add(newBoid);
             newBoids.add(newBoid);
         }
-        EssainBoids swarm = new EssainBoids(newBoids, manager, color);
+        EssaimBoids swarm = new EssaimBoids(newBoids, manager, color);
         manager.addEvent(swarm);
 
     }
@@ -46,7 +46,7 @@ public class TestBoidSimulator {
             boidsTotal.add(newBoid);
             newBoids.add(newBoid);
         }
-        EssainBoids swarm = new EssainBoids(newBoids, manager, color);
+        EssaimBoids swarm = new EssaimBoids(newBoids, manager, color);
         manager.addEvent(swarm);
 
     }

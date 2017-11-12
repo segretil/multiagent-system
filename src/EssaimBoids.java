@@ -1,12 +1,12 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class EssainBoids extends Event{
+public class EssaimBoids extends Event{
     private ArrayList<Boid> boids;
     private EventManager manager;
     private Color color;
 
-    public EssainBoids(ArrayList<Boid> essain, EventManager manager, Color couleur){
+    public EssaimBoids(ArrayList<Boid> essain, EventManager manager, Color couleur){
         super(0);
         this.manager = manager;
         this.boids = essain;
@@ -26,11 +26,4 @@ public class EssainBoids extends Event{
         return color;
     }
 
-    public void setBoids(ArrayList<Boid> boids) {
-        this.boids = boids;
-    }
-
-    public ArrayList<Boid> getBoids() {
-        return boids;
-    }
 }
