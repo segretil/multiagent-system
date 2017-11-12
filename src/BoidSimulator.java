@@ -8,10 +8,9 @@ public class BoidSimulator implements Simulable{
     private ArrayList<Boid> origin;
     private EventManager manager;
 
-    public BoidSimulator(ArrayList<Boid> boids, GUISimulator window) {
-        manager = new EventManager();
-        swarm = new EssainBoids(boids, manager, Color.WHITE);
-        manager.addEvent(swarm);
+    public BoidSimulator(EssainBoids essain, GUISimulator window, EventManager manager) {
+        this.manager = manager;
+        swarm = essain;
         this.window = window;
         this.origin = copy(swarm.getBoids());
         afficher();
