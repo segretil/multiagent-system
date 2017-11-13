@@ -109,10 +109,10 @@ public class Boid {
         return color;
     }
 
+    /**
+    Calcul de la force d'alignement
+     */
     public PVector align(ArrayList<Boid> boids){
-        /*
-        Calcul de la force d'alignement
-         */
         PVector sum = new PVector(0,0);
         double voisinsDistanceMax = 50;
         int compteur = 0;
@@ -138,12 +138,12 @@ public class Boid {
         }
 
     }
-
+    /**
+    Calcul la force de cohesion
+    Dans l'idée ressemble beaucoup à align
+     */
     public PVector cohesion(ArrayList<Boid> boids){
-        /*
-        Calcul la force de cohesion
-        Dans l'idée ressemble beaucoup à align
-         */
+
         PVector sum = new PVector(0,0);
         double voisinsDistanceMax = 50;
         int compteur = 0;
@@ -162,11 +162,12 @@ public class Boid {
         }
 
     }
-
+    /**
+    Ayant une cible permet de calculer la force pour y arriver
+     @param target
+     Cible visée
+    */
     public PVector seek(PVector target){
-        /*
-        Ayant une cible permet de calculer la force pour y arriver
-         */
         PVector voulu = PVector.sub(target, this.location);
         voulu.setMag(maxspeed);
         voulu.sub(velocity);
@@ -174,11 +175,10 @@ public class Boid {
         force.limit(maxforce);
         return force;
     }
-
+    /**
+    Applique toutes les règles
+    */
     public void applyRules(ArrayList<Boid> boids){
-        /*
-        Applique toutes les règles
-         */
         PVector cohesion = cohesion(boids);
         cohesion.mult(coefCoh);
         PVector align = align(boids);
@@ -209,11 +209,10 @@ public class Boid {
 
 
     }
-
+    /**
+    Calcul la force de séparation
+    */
     public PVector separate (ArrayList<Boid> boids) {
-        /*
-        Calcul la force de séparation
-         */
         float desiredseparation = size*4;
         PVector sum = new PVector(0, 0);
         int count = 0;

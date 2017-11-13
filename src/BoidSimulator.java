@@ -15,11 +15,10 @@ public class BoidSimulator implements Simulable{
         this.origin = copy(boidsTotal);
         afficher();
     }
-
+    /**
+    Affichage graphique des boids
+     */
     private void afficher() {
-        /*
-        Affichage graphique des boids
-         */
         this.window.reset();
         for (Boid boid : boidsTotal) {
             this.window.addGraphicalElement(new Oval((int) boid.getLocation().x, (int) boid.getLocation().y, boid.getColor(), boid.getColor(), boid.getSize()));
@@ -41,6 +40,9 @@ public class BoidSimulator implements Simulable{
         afficher();
     }
 
+    /**
+     Change tous les boids un à un en changeant l'adresse du boid courant
+     */
     private ArrayList<Boid> copy(ArrayList<Boid> boids){
         ArrayList<Boid> copy = new ArrayList<Boid>();
         for (Boid boid : boids){
@@ -49,6 +51,9 @@ public class BoidSimulator implements Simulable{
         return copy;
     }
 
+    /**
+    Change tous les boids un à un sans changer l'adresse du boid courant
+     */
     private void softCopy(ArrayList<Boid> boids){
         int compteur = 0;
         for (Boid pBoid : boidsTotal){

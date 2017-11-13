@@ -24,12 +24,11 @@ public class TestBoidSimulator {
 
         gui.setSimulable(new BoidSimulator(boidstotal, gui, manager));
     }
-
+    /**
+    Génère une population aléatoire sans règles particulières
+    */
     public static void generateRandomPopulation(ArrayList<Boid> boidsTotal, Color color, int nbBoids,
                                                        EventManager manager){
-        /*
-        Génère une population aléatoire sans règles particulières
-         */
         ArrayList<Boid> newBoids = new ArrayList<>();
         for (int i = 0; i < nbBoids; i++) {
             int x = (int) (Math.random() * 500);
@@ -43,12 +42,12 @@ public class TestBoidSimulator {
 
     }
 
+    /**
+    Génère une population aléatoire avec règles particulières
+    */
     public static void generateRandomPopulation(ArrayList<Boid> boidsTotal, Color color, int nbBoids,
                                                 EventManager manager, double coeffcohesion, double coeffalignement,
                                                 double coeffseparation){
-        /*
-        Génère une population aléatoire avec règles particulières
-         */
         ArrayList<Boid> newBoids = new ArrayList<>();
         for (int i = 0; i < nbBoids; i++) {
             int x = (int) (Math.random() * 500);
