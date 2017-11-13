@@ -19,8 +19,22 @@ public class Boid {
     private double coefSep;
 
     /**
-     * On définit ici arbitrairement certaines valeurs
-      */
+     * Constructeur général
+     *
+     * @param x
+     *          Abscisse du boid
+     * @param y
+     *          Ordonnée du boid
+     * @param colour
+     *          Couleur du boid
+     * @param coefficientCohesion
+     *          Coefficient pondérant la force de cohesion
+     * @param coefficientAlignement
+     *          Coefficient pondérant la force d'alignement
+     * @param coefficientSeparation
+     *          Coefficient pondérant la force de séparation
+     */
+
     public Boid(double x, double y, Color colour, double coefficientCohesion,
                 double coefficientAlignement, double coefficientSeparation){
         location = new PVector(x, y);
@@ -35,14 +49,25 @@ public class Boid {
         this.coefSep = coefficientSeparation;
     }
 
+    /**
+     * Constructeur pour boid avec des règles de même poids
+     * @param x
+     *          Abscisse du boid
+     * @param y
+     *          Ordonnée du boid
+     * @param colour
+     *          Couleur du boid
+     */
     public Boid(double x, double y, Color colour){
         this(x, y, colour, 1, 1, 1);
     }
 
+    /**
+     * Constructeur servant pour les deepCopy
+     * @param boid
+     *          boid à copier
+     */
     public Boid(Boid boid){
-        /**
-        * Constructeur servant pour faire une deepCopy
-         */
         location = new PVector(boid.location);
         velocity = new PVector(boid.velocity);
         acceleration = new PVector(boid.acceleration);
