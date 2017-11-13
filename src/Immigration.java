@@ -1,7 +1,9 @@
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.Set;
 
+/** Met en place la structure de l'immigration qui decoule de StructureCell
+ *
+ */
 public class Immigration extends StructureCell {
 
     public Immigration(int etats, int step, HashMap<Point, Integer> points, EventManager manager){
@@ -28,7 +30,6 @@ public class Immigration extends StructureCell {
 
     @Override
     public StructureCell copie(){
-        // On copie la structure pour pouvoir la garder en memoire
         Immigration cop = new Immigration(super.nbrStates, super.seuil,
         new HashMap<Point, Integer>(super.cell), super.manager);
         return cop;

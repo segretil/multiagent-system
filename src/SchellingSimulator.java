@@ -5,8 +5,10 @@ import java.util.Queue;
 import java.util.LinkedList;
 import java.awt.Color;
 
+/**
+ *     On gère le simulateur graphique du jeu
+ */
 public class SchellingSimulator implements Simulable {
-    // On gère le simulateur graphique du jeu
     private SchellingStructure simu;
     private SchellingStructure origine;
     private GUISimulator window;
@@ -23,16 +25,21 @@ public class SchellingSimulator implements Simulable {
         afficher();
     }
 
+    /** On affiche la Schelling du jeu de la vie
+     *
+     */
     private void afficher() {
-        // On affiche la Schelling du jeu de la vie
         this.window.reset();
         for (Point point : this.simu.cell.keySet()) {
             affiche_rect(point);
         }
     }
 
+    /** Affiche le bon rectangle en fonction de l'etat du point
+     *
+     * @param point
+     */
     private void affiche_rect(Point point) {
-        // Affiche le bon rectangle en fonction de l'etat du point
         int state = this.simu.cell.get(point);
         // Si l'on veut augmenter le nombre d'etats, il faut rajouter des case
         switch (state)
@@ -50,16 +57,21 @@ public class SchellingSimulator implements Simulable {
         }
     }
 
+    /** On passe à l'étape suivante du jeu de la vie
+     *
+     */
     @Override
     public void next() {
-        // On passe à l'étape suivante du jeu de la vie
         manager.next();
         afficher();
     }
 
-    @Override
+    /** Remet les points à leur point d'origine
+     *
+     */
+
+     @Override
     public void restart() {
-        // Remet les points à leur point d'origine
         this.simu = (SchellingStructure) this.origine.copiedeep();
         this.simu.setDate(0);
         this.manager.restart();

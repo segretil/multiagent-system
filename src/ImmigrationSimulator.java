@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.awt.Color;
 
 public class ImmigrationSimulator implements Simulable {
-    // On gère le simulateur graphique du jeu
     private Immigration simu;
     private Immigration origine;
     private GUISimulator window;
@@ -22,7 +21,6 @@ public class ImmigrationSimulator implements Simulable {
     }
 
     private void afficher() {
-        // On affiche la Schelling du jeu de la vie
         this.window.reset();
         for (Point point : this.simu.cell.keySet()) {
             affiche_rect(point);

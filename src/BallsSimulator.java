@@ -4,8 +4,10 @@ import gui.Simulable;
 
 import java.awt.*;
 
+/**   Gère l'animation des balls
+ *
+ */
 public class BallsSimulator implements Simulable {
-    // Gère l'animation des balls
     private Balls balles;
     private GUISimulator window;
     private EventManager manager;
@@ -25,6 +27,9 @@ public class BallsSimulator implements Simulable {
         Afficher();
     }
 
+    /**
+     * Parcours toutes les balles pour pouvoir les dessiner
+     */
     private void Afficher() {
         this.window.reset();
         for (int i = 0; i < balles.getNbBalles(); i++) {

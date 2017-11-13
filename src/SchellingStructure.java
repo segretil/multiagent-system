@@ -34,19 +34,26 @@ public class SchellingStructure extends StructureCell{
             }
         }
     }
-
+    /**
+     * On copie la structure pour pouvoir la garder en memoire
+     * Avec la file d'attente emptypoints qui ne se copie pas
+     *
+     * @return copiedeep
+     */
     @Override
     public StructureCell copie(){
-        // On copie la structure pour pouvoir la garder en memoire
-        // Avec la file d'attente emptypoints qui ne se copie pas
         SchellingStructure cop = new SchellingStructure(nbrStates, seuil,
         new HashMap<Point, Integer>(cell), emptyPoints, manager);
         return cop;
     }
 
+    /**
+     * On copie la structure pour pouvoir la garder en memoire
+     * Avec la file d'attente emptypoints qui se copie elle aussi
+     *
+     * @return copiedeep
+     */
     public StructureCell copiedeep(){
-        // On copie la structure pour pouvoir la garder en memoire
-        // Avec la file d'attente emptypoints qui se copie elle aussi
         SchellingStructure cop = new SchellingStructure(nbrStates, seuil,
         new HashMap<Point, Integer>(cell), new LinkedList<Point>(emptyPoints), manager);
         return cop;

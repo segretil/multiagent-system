@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Crée essaim de Boids qui possède une couleur et un EventManager
+ */
 public class EssaimBoids extends Event{
     private ArrayList<Boid> boids;
     private EventManager manager;

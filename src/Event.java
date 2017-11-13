@@ -1,3 +1,6 @@
+/**
+ * Crée une classe d'événements
+ */
 public abstract class Event {
     private long date;
 

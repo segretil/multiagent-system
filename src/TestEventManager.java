@@ -14,12 +14,5 @@ public class TestEventManager {
             manager.next();
             Thread.sleep(1000);
         }
-        System.out.println("-- Manager restarts --");
-
-        manager.restart();
-        while (!manager.isFinished()){
-            manager.next();
-            Thread.sleep(1000);
-        }
     }
 }
