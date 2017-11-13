@@ -16,7 +16,7 @@ public class ConwaySimulator implements Simulable {
         manager = new EventManager();
         this.simu = new Conway(points, manager);
         manager.addEvent(simu);
-        this.origine = this.simu.copie();
+        this.origine = (Conway) this.simu.copie();
         this.window = window;
         afficher();
     }
@@ -24,14 +24,14 @@ public class ConwaySimulator implements Simulable {
     private void afficher() {
         // On affiche la Schelling du jeu de la vie
         this.window.reset();
-        for (Point point : this.simu.conway.keySet()) {
+        for (Point point : this.simu.cell.keySet()) {
             affiche_rect(point);
         }
     }
 
     private void affiche_rect(Point point) {
         // Affiche le bon rectangle en fonction de l'etat du point
-        int state = this.simu.conway.get(point);
+        int state = this.simu.cell.get(point);
         // Si l'on veut augmenter le nombre d'etats, il faut rajouter des case
         int codeColor = 255 / 2;
         this.window.addGraphicalElement(new Rectangle(point.x*50 + 25,
@@ -50,7 +50,7 @@ public class ConwaySimulator implements Simulable {
     public void restart() {
         // Remet les points à leur point d'origine
         manager.restart();
-        this.simu = this.origine.copie();
+        this.simu = (Conway) this.origine.copie();
         manager.addEvent(simu);
         afficher();
     }
