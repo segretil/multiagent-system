@@ -1,5 +1,7 @@
 import java.awt.*;
-
+/**
+ * Implémentation de la classe Balls.
+ */
 public class Balls extends Event{
     private Point[] tabBalle;
     private int dxTotal = 0;
@@ -13,6 +15,15 @@ public class Balls extends Event{
     public int[] dx;
     public int[] dy;
     private EventManager manage;
+
+    /**
+     * Constructeur général
+     *
+     * @param balls
+     *          tableau qui contient les balles.
+     * @param manager
+     *          eventManager
+     */
 
     public Balls(Point[] balls, EventManager manager) {
         super(0);
@@ -30,7 +41,9 @@ public class Balls extends Event{
         tabBalle[k] = balls[k];
       }
     }
-
+    /**
+     * Gère le déplacement des balles
+     */
     @Override
     public void execute() {
         for (int i = 0; i < this.getNbBalles(); i++) {
@@ -64,7 +77,14 @@ public class Balls extends Event{
     public Point[] getBalls() {
         return this.tabBalle;
     }
-
+    /**
+     *Translate toutes les balls de dx suivant x et dy suivant y.
+     *
+     * @param dx
+     *          translation suivant x
+     * @param dy
+     *          translation suivant y
+     */
     public void translate(int dx, int dy){
       dxTotal += dx;
       dyTotal += dy;
@@ -73,7 +93,16 @@ public class Balls extends Event{
           this.tabBalle[i].y += dy;
       }
     }
-
+    /**
+     *Translate la balle d'indice indiceBall, de dx suivant x et dy suivant y.
+     *
+     * @param dx
+     *          translation suivant x
+     * @param dy
+     *          translation suivant y
+     * @param indiceBall
+     *          indice de la balle à translater
+     */
     public void translateBallIndice(int dx, int dy, int indiceBall){
       if (indiceBall >= nbBalles || indiceBall < 0){
         throw new IllegalArgumentException("Indice n'est pas correct");
@@ -83,7 +112,9 @@ public class Balls extends Event{
       dxTotallocal[indiceBall] += dx;
       dyTotallocal[indiceBall] += dy;
     }
-
+    /**
+     * Initialise les balles à leur positon d'origine.
+     */
     public void reInit(){
       for (int i = 0; i < this.tabBalle.length; i++) {
         this.tabBalle[i].x -= dxTotal + dxTotallocal[i];
