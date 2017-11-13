@@ -1,8 +1,6 @@
 import gui.*;
 import java.awt.Color;
 import java.awt.Point;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.HashMap;
 
 
@@ -20,7 +18,7 @@ public class TestImmigrationSimulator {
         initialisationVivants(nbrmaxvivants, nbrlines,
         etats, vivants);
 
-        gui.setSimulable(new ImmigrationSimulatorEvent(etats, seuil, vivants, gui));
+        gui.setSimulable(new ImmigrationSimulator(etats, seuil, vivants, gui));
 
 
     }

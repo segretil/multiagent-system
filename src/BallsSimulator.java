@@ -1,22 +1,25 @@
-import gui.*;
-import java.awt.Point;
-import java.awt.Color;
+import gui.GUISimulator;
+import gui.Oval;
+import gui.Simulable;
+
+import java.awt.*;
 
 public class BallsSimulator implements Simulable {
     // Gère l'animation des balls
     private Balls balles;
     private GUISimulator window;
-    private int[] dx;
-    private int[] dy;
+    private EventManager manager;
 
     public BallsSimulator(Point[] ballons, GUISimulator window) {
-        this.balles = new Balls(ballons);
-        this.dx = new int[this.balles.getNbBalles()];
-        this.dy = new int[this.balles.getNbBalles()];
+        manager = new EventManager();
+        this.balles = new Balls(ballons, manager);
+        manager.addEvent(balles);
+        balles.dx = new int[this.balles.getNbBalles()];
+        balles.dy = new int[this.balles.getNbBalles()];
         for (int k =0; k < balles.getNbBalles(); k++){
           //Default speed
-            this.dx[k] = 5;
-            this.dy[k] = 5;
+            balles.dx[k] = 5;
+            balles.dy[k] = 5;
         }
         this.window = window;
         Afficher();
@@ -34,30 +37,22 @@ public class BallsSimulator implements Simulable {
 
     @Override
     public void next() {
-        // Bouge les balles de 5x et 8y
-        for (int i = 0; i < balles.getNbBalles(); i++) {
-            this.balles.translateBallIndice(this.dx[i], this.dy[i], i);
-            int x = this.balles.getBalls()[i].x;
-            int y = this.balles.getBalls()[i].y;
-            // Changer le 490 par la taille de la window - 10 (la moitie du cercle)
-            // Je sais pas comment la recuperer lire la doc
-            if (x < balles.getRayon() || x > 500 - balles.getRayon()/2) {
-                this.dx[i] *= -1;
-                // On translate 2 fois pour revenir en dedans du cadre
-                this.balles.translateBallIndice(this.dx[i] * 2, 0, i);
-            }
-            if (y > 500 - balles.getRayon()|| y < balles.getRayon()/2) {
-                this.dy[i] *= -1;
-                this.balles.translateBallIndice(0, this.dy[i] * 2, i);
-            }
-        }
+        manager.next();
         Afficher();
     }
 
     @Override
     public void restart() {
-        // Remet les balles à son origine
+        // Remet les balles à leur origine
+        manager.restart();
         this.balles.reInit();
+        for (int k =0; k < balles.getNbBalles(); k++){
+            //Default speed
+            balles.dx[k] = 5;
+            balles.dy[k] = 5;
+        }
+        balles.setDate(0);
+        manager.addEvent(balles);
         Afficher();
     }
 }

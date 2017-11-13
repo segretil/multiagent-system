@@ -1,8 +1,6 @@
 import gui.*;
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.awt.Color;
 
 public class ImmigrationSimulator implements Simulable {
@@ -10,11 +8,14 @@ public class ImmigrationSimulator implements Simulable {
     private Immigration simu;
     private Immigration origine;
     private GUISimulator window;
+    private EventManager manager;
 
-    public ImmigrationSimulator(int etats,int step, HashMap<Point, Integer> points,
-     GUISimulator window) {
+    public ImmigrationSimulator(int etats, int step, HashMap<Point, Integer> points,
+                                GUISimulator window) {
         // On crée l'immigration du jeu de l'immigration
-        this.simu = new Immigration(etats, step, points);
+        manager = new EventManager();
+        this.simu = new Immigration(etats, step, points, manager);
+        manager.addEvent(simu);
         this.origine = this.simu.copie();
         this.window = window;
         afficher();
@@ -41,15 +42,16 @@ public class ImmigrationSimulator implements Simulable {
     @Override
     public void next() {
         // On passe à l'étape suivante du jeu de la vie
-        simu.execute();
+        manager.next();
         afficher();
     }
 
-    // j'ai modifier
     @Override
     public void restart() {
         // Remet les points à leur point d'origine
+        manager.restart();
         this.simu = this.origine.copie();
+        manager.addEvent(simu);
         afficher();
     }
 }

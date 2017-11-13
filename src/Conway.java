@@ -1,16 +1,16 @@
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.Set;
 
-public class Conway {
+public class Conway extends Event {
     HashMap<Point, Integer> conway = new HashMap<Point, Integer>();
     HashMap<Point, Integer> futureConway = new HashMap<Point, Integer>();
+    private EventManager manage;
 
-    // j'ai modifier
-    public Conway(HashMap<Point, Integer> points){
+    public Conway(HashMap<Point, Integer> points, EventManager manager){
+        super(0);
         conway = points;
+        manage = manager;
     }
 
     public int comptevoisinsetat(Point point){
@@ -47,7 +47,7 @@ public class Conway {
         }
     }
 
-
+    @Override
     public void execute(){
         // On execute un tour de passe sur tous les vivants
         this.futureConway = this.copie().conway;
@@ -56,13 +56,14 @@ public class Conway {
             change(point);
         }
         this.conway = this.futureConway;
+        this.setDate(getDate() + 1);
+        manage.addEvent(this);
     }
 
-    // j'ai modifier
     public Conway copie(){
         // On copie la structure pour pouvoir la garder en memoire
         Conway cop = new Conway(
-        new HashMap<Point, Integer>(conway));
+        new HashMap<Point, Integer>(conway), manage);
         return cop;
     }
 }

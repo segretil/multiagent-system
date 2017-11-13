@@ -1,8 +1,6 @@
 import gui.*;
 import java.awt.Color;
 import java.awt.Point;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.HashMap;
 
 public class TestConwaySimulator {
@@ -17,7 +15,7 @@ public class TestConwaySimulator {
         initialisationVivants(nbrmaxvivants, nbrlines,
         2, vivants);
 
-        gui.setSimulable(new ConwaySimulatorEvent(vivants, gui));
+        gui.setSimulable(new ConwaySimulator(vivants, gui));
 
 
     }

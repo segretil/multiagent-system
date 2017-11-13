@@ -1,8 +1,6 @@
-import gui.*;
-import java.awt.Point;
-import java.awt.Color;
+import java.awt.*;
 
-public class Balls {
+public class Balls extends Event{
     private Point[] tabBalle;
     private int dxTotal = 0;
     private int dyTotal = 0;
@@ -12,8 +10,12 @@ public class Balls {
     public Color colorinside;
     private int rayon;
     private int nbBalles;
+    public int[] dx;
+    public int[] dy;
+    private EventManager manage;
 
-    public Balls(Point[] balls) {
+    public Balls(Point[] balls, EventManager manager) {
+        super(0);
       nbBalles = balls.length;
       tabBalle = new Point[nbBalles];
       dxTotallocal = new int[nbBalles];
@@ -23,9 +25,32 @@ public class Balls {
       colorinside = Color.WHITE;
       // Default rayon
       rayon = 10;
+      manage = manager;
       for (int k =0; k < nbBalles; k++){
         tabBalle[k] = balls[k];
       }
+    }
+
+    @Override
+    public void execute() {
+        for (int i = 0; i < this.getNbBalles(); i++) {
+            this.translateBallIndice(this.dx[i], this.dy[i], i);
+            int x = this.getBalls()[i].x;
+            int y = this.getBalls()[i].y;
+            // Changer le 490 par la taille de la window - 10 (la moitie du cercle)
+            // Je sais pas comment la recuperer lire la doc
+            if (x < this.getRayon() || x > 500 - this.getRayon()/2) {
+                this.dx[i] *= -1;
+                // On translate 2 fois pour revenir en dedans du cadre
+                this.translateBallIndice(this.dx[i] * 2, 0, i);
+            }
+            if (y > 500 - this.getRayon()|| y < this.getRayon()/2) {
+                this.dy[i] *= -1;
+                this.translateBallIndice(0, this.dy[i] * 2, i);
+            }
+        }
+        this.setDate(getDate() + 1);
+        manage.addEvent(this);
     }
 
     public int getNbBalles(){

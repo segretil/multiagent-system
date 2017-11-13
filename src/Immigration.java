@@ -1,19 +1,20 @@
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.Set;
 
-public class Immigration {
+public class Immigration extends Event {
     private int nbrstates;
     private int seuil;
     HashMap<Point, Integer> immigration = new HashMap<Point, Integer>();
     HashMap<Point, Integer> futureImmigration = new HashMap<Point, Integer>();
+    private EventManager manage;
 
-    public Immigration(int etats, int step, HashMap<Point, Integer> points){
+    public Immigration(int etats, int step, HashMap<Point, Integer> points, EventManager manager){
+        super(0);
         nbrstates = etats;
         seuil = step;
         immigration = points;
+        manage = manager;
     }
 
     public int comptevoisinsetat(Point point){
@@ -38,7 +39,6 @@ public class Immigration {
         return nbrstates;
     }
 
-    // j'ai modifier
     public void change(Point point){
         // Change l'etat du point actuel
         int nbreVoisins = this.comptevoisinsetat(point);
@@ -49,7 +49,7 @@ public class Immigration {
         }
     }
 
-
+    @Override
     public void execute(){
         // On execute un tour de passe sur tous les vivants
         this.futureImmigration = this.copie().immigration;
@@ -58,13 +58,14 @@ public class Immigration {
             change(point);
         }
         this.immigration = this.futureImmigration;
+        this.setDate(getDate() + 1);
+        manage.addEvent(this);
     }
 
-    // j'ai modifier
     public Immigration copie(){
         // On copie la structure pour pouvoir la garder en memoire
         Immigration cop = new Immigration(nbrstates, seuil,
-        new HashMap<Point, Integer>(immigration));
+        new HashMap<Point, Integer>(immigration), manage);
         return cop;
     }
 }

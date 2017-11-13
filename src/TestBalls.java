@@ -1,7 +1,3 @@
-
-import gui.*;
-
-import java.awt.Color;
 import java.awt.Point;
 
 public class TestBalls {
@@ -9,8 +5,9 @@ public class TestBalls {
 		Point a = new Point(0, 0);
 		Point b = new Point(0, 1);
 		Point c = new Point(0, 2);
+		EventManager manager = new EventManager();
 		Point[] tab = {a, b, c};
-		Balls ballons = new Balls(tab);
+		Balls ballons = new Balls(tab, manager);
 
 		System.out.println("Initialisation : ");
 		System.out.println(ballons);

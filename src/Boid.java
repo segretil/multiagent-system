@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.util.*;
-
+/**
+ * Implémentation de la structure de boid
+ */
 public class Boid {
     private PVector location;
     private PVector velocity;
@@ -16,11 +18,11 @@ public class Boid {
     private double coefAli;
     private double coefSep;
 
+    /**
+     * On définit ici arbitrairement certaines valeurs
+      */
     public Boid(double x, double y, Color colour, double coefficientCohesion,
                 double coefficientAlignement, double coefficientSeparation){
-        /*
-        On définit ici arbitrairement certaines valeurs
-         */
         location = new PVector(x, y);
         velocity = new PVector(0, 0);
         acceleration = new PVector(0, 0);
@@ -38,8 +40,8 @@ public class Boid {
     }
 
     public Boid(Boid boid){
-        /*
-        Constructeur servant pour faire une deepCopy
+        /**
+        * Constructeur servant pour faire une deepCopy
          */
         location = new PVector(boid.location);
         velocity = new PVector(boid.velocity);
